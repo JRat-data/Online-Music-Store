@@ -1,0 +1,26 @@
+Various ways to load, drop, and look at the database
+1. If you have ant installed at home, it gives you one way that works both on 
+topcat and at home, once you have defined ORACLE_USER, etc.
+On topcat, ant is already installed.
+ant load-oradb
+ant show-oradb
+ant drop-oradb
+ant load-mysqldb
+ant show-mysqldb
+ant drop-mysqldb
+ant load-h2
+ant show-h2
+ant drop-h2
+
+2. For database H2, runH2Script.sh/runH2Script.cmd works for all platforms:
+runH2Script.sh createdb.sql   (for Windows, drop the .sh)
+runH2Script.sh showdb.sql
+runH2Script.sh dropdb.sql
+Note that you'll have two H2 databases, one on topcat, one on your home system.
+
+Scripts for mysql and oracle: these all depend on env vars ORACLE_USER, etc.
+runOracleScript.sh and runMysqlScript.sh run on only on topcat, using
+   the system programs sqlplus and mysql. 
+For home use, try these shell scripts that use a JDBC program to run the SQL script remotely.
+runOracleScriptJDBC.sh createdb.sql, etc. (for Windows, drop the .sh)
+runMysqlScriptJDBC.sh createdb.sql, etc.

@@ -1,0 +1,47 @@
+
+Note: to run this project on Windows or Linux/Mac with the embedded DB H2 (easiest way):
+0. If running on topcat, edit src/main/resources/application.properties and
+  set the port to one of your assigned ports, preferably xxxx3 to follow
+  our conventions (for example, 51303). See CS636Ports.html for your ports.
+
+1. Drop and load the music database (the tables have changed a little)
+   cd to the database directory here.
+   and use the db tools there, same as in pizza1 and music1 and pizza3
+   
+2. Use "mvn clean package" when cd'd to this directory to build/rebuild the jar
+
+3. On Linux or Mac, use "chmod +x *.sh" to make all shell scripts in this directory
+ executable, and similarly for the database directory. 
+
+4. Run the program to start tomcat with the webapp: using convenience script
+    runJarByProfile h2 web  (Windows)   
+or  runJarByProfile.sh h2 web (Linux or Mac)
+or using mvn directly (see contents of runMvnByProfile). Either way, let it hang.
+
+5. Browse to localhost:9003/welcome.html to see the top-level page. Replace 9003 here
+with your own port ending in 3 if running on topcat.
+
+6. Run all the JUnit tests with mvn test. They are also run during mvn package.
+
+7. The old line-oriented programs can be run outside of tomcat:
+    runJarByProfile h2 SystemTest  (Windows)   (or TakeOrder or ShopAdmin)
+or  runJarByProfile.sh h2 SystemTest  (Linux or Mac)
+or  runMvnByProfile h2 SystemTest, etc.
+
+To use a real DB: you need to define environment variables (same as for music1)
+ For Oracle database, set up env variables ORACLE_USER, ORACLE_PW, ORACLE_SITE
+ For MySQL use, set up env vars MYSQL_USER, MYSQL_PW, MYSQL_SITE
+Then these are accessed from the profiles to setup the JDBC config.
+So you can run simply  runJarByProfile oracle web   for example, and
+let it hang.  Use a browser to run the webapp as in step 5.
+
+Inside eclipse:
+For development and debugging, run SBApplication as a Java app inside eclipse,
+or debug as a Java app. By default these will run the web case using Oracle.
+To run using H2, define an eclipse Run configuration with VM arg 
+-Dspring.profiles.active=h2 (look in the Arguments tab). To run SystemTest, 
+add the program arg SystemTest in the Arguments tab.
+
+Note: if H2 executions are giving funny errors, esp. ones complaining about accessing 
+pages, just reinitialize it: cd to your home directory (c:\Users\username on Windows)
+and delete file test-music.mv.db, then reload the db
