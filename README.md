@@ -6,5 +6,5 @@ A majority of the project was provided by a professor as this was a project for 
 
 Files edited are described in the README.txt file.
 
-This project was designed using the Spring MVS framework and was build using maven.
+This project was designed using the Spring MVS framework and was built using maven.
 It was ran in a unix command shell and used resources provided by the school.
